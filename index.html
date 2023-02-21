@@ -23,6 +23,7 @@
 
         <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
         <script src="https://unpkg.com/esri-leaflet-vector@4.0.0/dist/esri-leaflet-vector.js"></script>
+        <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.3/dist/esri-leaflet-geocoder.js"></script>
 
         <script src="js/map.js"></script>
         <script src="js/switch.js"></script>
@@ -35,93 +36,88 @@
                 <h2 class="head-text col-xs-6"> BathyViz </h2>
             </div>
             <div class="main-body row">
-                <div class="menu col-xs-12 col-sm-2 col-md-2 col-lg-2">
-                    <div class="subsection-head"> Select Action </div>
-                    <div class="subsection menu-type">
-                        <div class="menu-cont">
-                            <div class="menu-item" id="layer-item"> Layers </div>
-                            <div class="menu-item" id="depth-item"> Depth </div>
-                        </div>
-                        
-                    </div>
-                    <div class="subsection-head"> Service Info </div>
-                    <div class="subsection service-info">
-                        <div class="info-text layer-info"> This service allows you to add layers on the map. By checking and unchecking the 
-                            list of layers displayed on the right, layers will be added and removed from the map.
-                        </div>
-
-                        <div class="info-text depth-info"> With this service, you can select areas on the maps by making polygons via clicking.
-                            You can then make analysis of the depths of the selected area. 
-                        </div>
-                    </div>
-                </div>
-                <div class="screen col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                <div class="screen col-xs-12 col-sm-7 col-md-7 col-lg-7">
                     <div class="subsection screen-visual">
                         <div id="mapDiv"></div>
                     </div>
                     <div class="subsection-head cursor-title"> Cursor Detail </div>
                     <div class="subsection code row">
-                        <div class="cur-det-left col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                            <div class="cur-label"> Long: </div> <div class="cur-value lat-value"> 2.374867382633683737</div> <br />
+                        <div class="cur-det-left col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="cur-label"> Long: </div> <div class="cur-value lat-value"> 2.374867382633683737</div>
                             <div class="cur-label"> Lat: </div> <div class="cur-value long-value"> 2.374867382633683737</div>
-                        </div>
-                        <div class="cur-det-left col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                            <div class="cur-label"> Name: </div> <div class="cur-value"> Odo Otin River</div> <br />
-                            <div class="cur-label"> Depth: </div> <div class="cur-value"> 2.3748 </div>
                         </div>
                     </div>
                 </div>
-                <div class="result col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                    <div class="result-cont layer" >
-                        <div class="subsection-head"> Layers </div>
-                        <div class="subsection sub-conf">
-                            <div class="each-conf">
-                                <input type="radio" name="layer-radio" class="input" checked value="esri"/>
-                                <div class="conf-label"> Esri Ocean Layer </div>
-                                <div class="conf-desc"> This layer is provided by Esri to serve as the comunity layer of the department of justice </div>
-                            </div>
+                <div class="result col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                    <div class="result-cont">
+                        <div class="subsection layer-sub-conf">
+                            <div class="row">
+                                <div class="layer col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                    <div class="subsection-head"> Basemaps </div>
+                                    <div class="each-conf">
+                                        <input type="radio" name="layer-radio" class="layer-input" checked value="esri"/>
+                                        <div class="conf-label"> Esri Ocean Layer  </div>
+                                    </div>
+        
+                                    <div class="each-conf">
+                                        <input type="radio" name="layer-radio" class="layer-input" value="stamen"/>
+                                        <div class="conf-label"> Stamen Water Color </div>
+                                    </div>
+        
+                                    <div class="each-conf">
+                                        <input type="radio" name="layer-radio" class="layer-input" value="osm_topo"/>
+                                        <div class="conf-label"> OSM Topograpgy </div>
+                                    </div>
+                                </div>
 
-                            <div class="each-conf">
-                                <input type="radio" name="layer-radio" class="input" checked value="stamen"/>
-                                <div class="conf-label"> Stamen Water Color Layer </div>
-                                <div class="conf-desc"> This layer is provided by Esri to serve as the comunity layer of the department of justice </div>
-                            </div>
-                            
-                            <div class="each-conf">
-                                <input type="radio" name="layer-radio" class="input" />
-                                <div class="conf-label"> Esri Ocean Layer </div>
-                                <div class="conf-desc"> This layer is provided by Esri to serve as the comunity layer of the department of justice </div>
-                            </div>
-                            <div class="each-conf">
-                                <input type="radio" name="layer-radio" class="input" />
-                                <div class="conf-label"> Esri Ocean Layer </div>
-                                <div class="conf-desc"> This layer is provided by Esri to serve as the comunity layer of the department of justice </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="subsection-head"> Overlays </div>
+                                        <div class="each-conf">
+                                            <input type="checkbox" name="overlay-chechbox" class="overlay-chechbox" value="nonna"/>
+                                            <div class="conf-label"> CHS NONNA-100 </div>
+                                        </div>
+            
+                                        <div class="each-conf">
+                                            <input type="checkbox" name="overlay-chechbox" class="overlay-chechbox" value="iho"/>
+                                            <div class="conf-label"> IHO Mosaic </div>
+                                        </div>
+                                        
+                                        <div class="each-conf">
+                                            <input type="checkbox" name="overlay-chechbox" class="overlay-chechbox" value="gepco"/>
+                                            <div class="conf-label"> GEBCO Contours </div>
+                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="result-cont depth" >
-                        <div class="subsection-head"> Depth Analysis </div>
-                        <div class="subsection sub-conf">
-                            <div class="each-conf">
-                                <div class="conf-label"> Summary of Selected Points </div>
-                                <div class="conf-desc">
-                                    <div class="summary-label"> No. Points: </div><div class="summary-value"> 200 </div> <br>
-                                    <div class="summary-label"> Deepest Depth: </div><div class="summary-value"> 30837366 </div><br>
-                                    <div class="summary-label"> Shalowest Depth: </div><div class="summary-value"> 353635635 </div> <br>
-                                    <div class="summary-label"> Depth Range: </div><div class="summary-value"> 353635635 </div> <br>
-                                    <div class="summary-label"> Mean Depth: </div><div class="summary-value"> 78 </div> <br>
-                                    <div class="summary-label"> Depth Deviation: </div><div class="summary-value"> 672526252 </div> <br>
+                        <div class="subsection layer-sub-conf">
+                            <div class="row">
+                                <div class="layer col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                    <div class="each-conf">
+                                        <div class="subsection-head"> Visualization </div>  
+                                        <div class="visuals">
+                                            <img src='images/line.png' class="switch-plot" id="line-plot"/>
+                                            <img src='images/bar.gif' class="switch-plot" id="bar-plot"/>
+                                            <img src='images/scatter.png' class="switch-plot" id="scatter-plot"/>
+                                        </div>
+                                        <div class="conf-desc"> 
+                                            <canvas id="mycanvas" class="myCanvas"></canvas>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="each-conf">
-                                <div class="conf-label"> Visualization </div>  
-                                <div class="visuals">
-                                    <img src='images/line.png' class="switch-plot" id="line-plot"/>
-                                    <img src='images/bar.gif' class="switch-plot" id="bar-plot"/>
-                                    <img src='images/scatter.png' class="switch-plot" id="scatter-plot"/>
-                                </div>
-                                <div class="conf-desc"> 
-                                    <canvas id="mycanvas" class="myCanvas"></canvas>
+                                <div class="layer col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="each-conf">
+                                        <div class="subsection-head"> Summary </div>
+                                        <div class="conf-desc">
+                                            <div class="summary-label"> Points: </div><div class="summary-value"> 200 </div> <br>
+                                            <div class="summary-label"> Deepest: </div><div class="summary-value"> 30837366 </div><br>
+                                            <div class="summary-label"> Shalowest: </div><div class="summary-value"> 353635635 </div> <br>
+                                            <div class="summary-label"> Range: </div><div class="summary-value"> 353635635 </div> <br>
+                                            <div class="summary-label"> Mean: </div><div class="summary-value"> 78 </div> <br>
+                                            <div class="summary-label"> Deviation: </div><div class="summary-value"> 672526252 </div> <br>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
